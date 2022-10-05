@@ -10,11 +10,7 @@ import pandas as pd
 # read in csv files
 nextstrain = pd.read_csv('~/monkeypox/data/metadata.tsv', sep='\t', parse_dates=['date'])
 wa = pd.read_csv('~/monkeypox/data/doh_metadata_2022-08-18_linkedWDRS.csv', parse_dates=['collect_date'])
-print(type(wa['collect_date']))
 
-# print column headers
-print(list(nextstrain.columns))
-print(list(wa.columns))
 
 # rename columns in wa metadata to match nextstrain
 wa = wa.rename(columns={
@@ -30,7 +26,6 @@ wa = wa.set_index('genbank_accession_rev', drop=False)
 
 # convert collect_date to YYYY-MM-DD
 wa['date'] = pd.to_datetime(wa['date']).dt.strftime('%Y-%m-%d')
-print(wa['date'].head(10))
 
 # replace wa collection dates
 nextstrain_dates = pd.DataFrame(nextstrain.loc[:, 'date'])
@@ -48,5 +43,7 @@ new_df[['age', 'sex', 'county']] = wa[['age', 'sex', 'county']]
 # write out to gzip compressed tsv file
 new_df.to_csv('metadata.tsv.gz', sep='\t', compression='gzip')
 
-
+print('Success! Exit Code 0')
+print('Do not worry about the append() error code.')
+print('Metadata has been updated for WA cases in the Nextstrain metadata file')
 
