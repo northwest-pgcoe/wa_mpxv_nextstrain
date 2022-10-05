@@ -12,7 +12,7 @@ The monkeypox sequencing data is maintained by the Nextstrain team and can be re
 # Updating the metadata to include metadata for WA cases
 The python script [wa-mpxv-metadata-update.py](https://github.com/DOH-SML1303/wa_mpxv/blob/main/wa-mpxv-metadata-update.py) will allow you to update the metadata in the nextstrain `metadata.tsv.gz` file with data from a separate spreadsheet containing the metadata for the WA cases. You may need to update the file path for the WA metadata on line 12. You can update the script as necessary (especially if the variables are different) in order to get the script to run. Note on line 11 that the `metadata.tsv.gz` has been extracted as `metadata.tsv`. You will have to extract the metadata file, but line 49 compresses to `metadata.tsv.gz`.
 
-Use the command `python3 ~/monkeypox/config/wa_mpxv/wa-mpxv-metadata-update.py` to run the script in a terminal window. If already in the `~/monkeypox/config/wa_mpxv` folder you can simply run `python3 wa-mpxv-metadata-update.py`.
+To run the python script, navigate to the `/data` folder in the monkeypox repository in the terminal and use the command `python3 ~/monkeypox/config/wa_mpxv/wa-mpxv-metadata-update.py`. The `metadata.tsv.gz` will automatically replace the old metadata file.
 
 # Running the WA-focused monkeypox build in nextstrain
 Go through the proper steps of activating the `nextstrain` environment in the terminal window using `conda activate nextstrain` and then navigate to the monkeypox repository using `cd monkeypox`. Run the command `nextstrain build --docker --cpus 6 . --configfile config/wa_mpxv/wa_config_hmpxv1.yaml` to run the pipeline.
