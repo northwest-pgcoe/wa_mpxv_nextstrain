@@ -11,7 +11,6 @@ import pandas as pd
 nextstrain = pd.read_csv('~/monkeypox/data/metadata.tsv', sep='\t', parse_dates=['date'])
 wa = pd.read_csv('~/monkeypox/data/doh_metadata_2022-08-18_linkedWDRS.csv', parse_dates=['collect_date'])
 
-
 # rename columns in wa metadata to match nextstrain
 wa = wa.rename(columns={
     'collect_date': 'date',
