@@ -30,12 +30,14 @@ wa['date'] = pd.to_datetime(wa['date']).dt.strftime('%Y-%m-%d')
 nextstrain_dates = pd.DataFrame(nextstrain.loc[:, 'date'])
 wa_dates = pd.DataFrame(wa.loc[:, 'date'])
 new_dates = wa_dates.append(nextstrain_dates)
-# drop duplicates
-new_dates = new_dates.drop_duplicates('date')
+
+# remove duplicate entries in the index
 new_dates = pd.DataFrame(new_dates)
-# replace nextstrain metadata dates with updated dates
+new_dates = new_dates[~new_dates.index.duplicated(keep='first')]
+
+# replace new_df dates with updated dates
 new_df = pd.DataFrame(nextstrain)
-new_df['date'] = new_dates['date']
+new_df[['date']] = new_dates[['date']]
 
 # add age, sex, and county columns
 new_df[['age', 'sex', 'county']] = wa[['age', 'sex', 'county']]

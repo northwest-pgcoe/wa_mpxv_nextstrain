@@ -12,8 +12,13 @@
   "build_url": "https://github.com/nextstrain/monkeypox",
   "colorings": [
     {
-      "key": "location",
-      "title": "Location",
+      "key": "age",
+      "title": "Patient Age",
+      "type": "categorical"
+    },
+    {
+      "key": "sex",
+      "title": "Patient Sex",
       "type": "categorical"
     },
     {
@@ -22,13 +27,13 @@
       "type": "categorical"
     },
     {
-      "key": "age",
-      "title": "Patient Age",
+      "key": "location",
+      "title": "Location",
       "type": "categorical"
     },
     {
-      "key": "sex",
-      "title": "Patient Sex",
+      "key": "division",
+      "title": "Division",
       "type": "categorical"
     },
     {
@@ -82,6 +87,8 @@
     "region",
     "recency",
     "host",
-    "location"
+    "division",
+    "location",
+    "county"
   ]
 }
