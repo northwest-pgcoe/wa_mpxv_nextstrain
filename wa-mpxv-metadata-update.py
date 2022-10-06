@@ -8,7 +8,7 @@
 import pandas as pd
 
 # read in csv files
-nextstrain = pd.read_csv('~/monkeypox/data/metadata.tsv', sep='\t', parse_dates=['date'])
+nextstrain = pd.read_csv('~/monkeypox/data/metadata.tsv.gz', sep='\t', compression='gzip', parse_dates=['date'])
 wa = pd.read_csv('~/monkeypox/data/doh_metadata_2022-08-18_linkedWDRS.csv', parse_dates=['collect_date'])
 
 # rename columns in wa metadata to match nextstrain
@@ -20,8 +20,8 @@ wa = wa.rename(columns={
     'PATIENT__ADDRESS__CORRECTED__COUNTY': 'county'})
 
 # set index
-nextstrain = nextstrain.set_index('genbank_accession_rev', drop=False)
-wa = wa.set_index('genbank_accession_rev', drop=False)
+nextstrain = nextstrain.set_index('genbank_accession_rev')
+wa = wa.set_index('genbank_accession_rev')
 
 # convert collect_date to YYYY-MM-DD
 wa['date'] = pd.to_datetime(wa['date']).dt.strftime('%Y-%m-%d')
@@ -34,13 +34,14 @@ new_dates = wa_dates.append(nextstrain_dates)
 new_dates = new_dates.drop_duplicates('date')
 new_dates = pd.DataFrame(new_dates)
 # replace nextstrain metadata dates with updated dates
-new_df = pd.DataFrame(nextstrain.replace(to_replace=nextstrain['date'], value=new_dates['date'], inplace=False))
+new_df = pd.DataFrame(nextstrain)
+new_df['date'] = new_dates['date']
 
 # add age, sex, and county columns
 new_df[['age', 'sex', 'county']] = wa[['age', 'sex', 'county']]
 
 # write out to gzip compressed tsv file
-new_df.to_csv('metadata.tsv.gz', sep='\t', compression='gzip')
+new_df.to_csv('~/monkeypox/data/metadata.tsv.gz', sep='\t', compression='gzip')
 
 print('Success! Exit Code 0')
 print('Do not worry about the append() error code.')
