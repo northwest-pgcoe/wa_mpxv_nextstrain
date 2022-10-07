@@ -22,6 +22,11 @@
       "type": "categorical"
     },
     {
+      "key": "travel",
+      "title": "Travel (Past 3 Weeks)",
+      "type": "categorical"
+    },
+    {
       "key": "county",
       "title": "County",
       "type": "categorical"
