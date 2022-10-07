@@ -9,15 +9,16 @@ import pandas as pd
 
 # read in csv files
 nextstrain = pd.read_csv('~/monkeypox/data/metadata.tsv.gz', sep='\t', compression='gzip', parse_dates=['date'])
-wa = pd.read_csv('~/monkeypox/data/doh_metadata_2022-08-18_linkedWDRS.csv', parse_dates=['collect_date'])
+wa = pd.read_csv('~/monkeypox/data/doh_metadata_running_linkedWDRS.csv', parse_dates=['SPECIMEN__COLLECTION__DATE'])
 
 # rename columns in wa metadata to match nextstrain
 wa = wa.rename(columns={
-    'collect_date': 'date',
-    'genbank': 'genbank_accession_rev',
+    'SPECIMEN__COLLECTION__DATE': 'date',
+    'GENBANK_ID': 'genbank_accession_rev',
     'PATIENT__AGE': 'age',
     'PATIENT__ADMINISTRATIVE__SEX': 'sex',
-    'PATIENT__ADDRESS__CORRECTED__COUNTY': 'county'})
+    'PATIENT__ADDRESS__CORRECTED__COUNTY': 'county',
+    'TRAVEL__LAST_3__WEEKS': 'travel'})
 
 # set index
 nextstrain = nextstrain.set_index('genbank_accession_rev')
@@ -40,12 +41,12 @@ new_df = pd.DataFrame(nextstrain)
 new_df[['date']] = new_dates[['date']]
 
 # add age, sex, and county columns
-new_df[['age', 'sex', 'county']] = wa[['age', 'sex', 'county']]
+new_df[['age', 'sex', 'county', 'travel']] = wa[['age', 'sex', 'county', 'travel']]
 
 # write out to gzip compressed tsv file
 new_df.to_csv('~/monkeypox/data/metadata.tsv.gz', sep='\t', compression='gzip')
 
 print('Success! Exit Code 0')
-print('Do not worry about the append() error code.')
+print('Do not worry about the append() warning.')
 print('Metadata has been updated for WA cases in the Nextstrain metadata file')
 
