@@ -22,7 +22,8 @@ min_date: 2017
 min_length: 100000
 sequences_per_group: "--sequences-per-group 100"
 group_by: "--group-by year month country"
-filters: "--exclude-where outbreak!=hMPXV-1"
+#filters: "--exclude-where outbreak!=hMPXV-1"
+filters: "--include-where 'division=Washington'"
 
 ## align
 max_indel: 10000
