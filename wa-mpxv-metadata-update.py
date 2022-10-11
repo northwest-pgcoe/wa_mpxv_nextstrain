@@ -44,7 +44,7 @@ new_df[['date']] = new_dates[['date']]
 new_df[['age', 'sex', 'county', 'travel']] = wa[['age', 'sex', 'county', 'travel']]
 
 # select just the hMPXV-1 cases for the build
-hMPXV = nextstrain[nextstrain['outbreak'] == 'hMPXV-1']
+hMPXV = new_df[new_df['outbreak'] == 'hMPXV-1']
 
 # write out to gzip compressed tsv file
 hMPXV.to_csv('~/monkeypox/data/metadata.tsv.gz', sep='\t', compression='gzip')
