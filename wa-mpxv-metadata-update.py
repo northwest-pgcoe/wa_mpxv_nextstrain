@@ -43,8 +43,11 @@ new_df[['date']] = new_dates[['date']]
 # add age, sex, and county columns
 new_df[['age', 'sex', 'county', 'travel']] = wa[['age', 'sex', 'county', 'travel']]
 
+# select just the hMPXV-1 cases for the build
+hMPXV = nextstrain[nextstrain['outbreak'] == 'hMPXV-1']
+
 # write out to gzip compressed tsv file
-new_df.to_csv('~/monkeypox/data/metadata.tsv.gz', sep='\t', compression='gzip')
+hMPXV.to_csv('~/monkeypox/data/metadata.tsv.gz', sep='\t', compression='gzip')
 
 print('Success! Exit Code 0')
 print('Do not worry about the append() warning.')
