@@ -14,5 +14,7 @@ The python script [wa-mpxv-metadata-update.py](https://github.com/DOH-SML1303/wa
 
 To run the python script, use the command `python3 ~/monkeypox/config/wa_mpxv/wa-mpxv-metadata-update.py`. The `metadata.tsv.gz` will automatically replace the old metadata file.
 
+Next, you will need to subset the hMPXV-1 cases in the master metadata file.* To run the python script, use the command `python3 ~/monkeypox/config/wa_mpxv/select-hMPXV-1-nextstrain.py`. This will automatically replace the `metadata.tsv.gz` file. *Please note that this step has been included as the filter step in the `wa_config_hmpxv1.yaml` on line 25 `filters: "--exclude-where outbreak!=hMPXV-1"` has been replaced with the filter step `filters: "--include-where 'division=Washington'"` to include all Washington state sequences.
+
 # Running the WA-focused monkeypox build in nextstrain
 Go through the proper steps of activating the `nextstrain` environment in the terminal window using `conda activate nextstrain` and then navigate to the monkeypox repository using `cd monkeypox`. Run the command `nextstrain build --docker --cpus 6 . --configfile config/wa_mpxv/wa_config_hmpxv1.yaml` to run the pipeline.
