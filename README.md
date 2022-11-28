@@ -32,3 +32,6 @@ If you are bypassing the use of Docker and using Ambient in combination with sna
  nextalign run --jobs 3 --reference config/reference.fasta --genemap config/genemap.gff --max-indel 10000 --seed-spacing 1000 --retry-reverse-complement --output-fasta - --output-insertions results/wa_hmpxv1/insertions.fasta results/wa_hmpxv1/reversed.fasta | seqkit seq -i > results/wa_hmpxv1/aligned.fasta
  ```
 followed by `snakemake -j 1 -p --configfile config/wa_mpxv/wa_config_hmpxv1.yaml`
+
+# Visualizing the results
+`nextstrain view auspice/`
